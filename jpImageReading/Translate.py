@@ -1,4 +1,5 @@
 import requests
+import Ui
 
 def search_japanese_word(word):
     search_result = api_search_word(word)  # Replace with your Japanese word of interest
@@ -14,6 +15,8 @@ def search_japanese_word(word):
             print("English Meanings:")
             for idx, meaning in enumerate(meanings, start=1):
                 print(f"{idx}. {meaning}")
+
+            Ui.initUI(japanese_word, meanings)
 
             print("----------------------")
 
