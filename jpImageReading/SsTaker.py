@@ -1,10 +1,10 @@
 #pip install pyautogui
 #pip install pynput
 
-import pyautogui
-import tkinter as tk
+
+
 from PIL import ImageGrab
-from tkinter import messagebox
+
 from pynput import mouse
 from PIL import Image
 import Ui
