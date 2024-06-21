@@ -1,43 +1,9 @@
 import sys
 
 import tkinter as tk
-from tkinter import messagebox
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextEdit, QPushButton
-
-
-def initUI(kanji, meanings):
-    # Create the application object
-    app = QApplication(sys.argv)
-
-    # Create the main window
-    window = QWidget()
-    window.setWindowTitle('Copyable Text Example')
-
-    # Create a layout for the main window
-    layout = QVBoxLayout(window)
-
-    # Create a QTextEdit widget to display copyable text
-    text_edit = QTextEdit()
-    clean_meanings = ', '.join(meanings)
-
-
-    text_edit.setPlainText(f'{kanji}\n\n{clean_meanings}')
-    text_edit.setReadOnly(True)  # Make the text read-only
-    layout.addWidget(text_edit)
-
-    # Create a button to copy text
-    copy_button = QPushButton('Copy Text')
-    copy_button.clicked.connect(lambda: text_edit.selectAll())
-    layout.addWidget(copy_button)
-
-    # Set the layout for the main window
-    window.setLayout(layout)
-
-    # Show the main window
-    window.show()
-
-    # Execute the application's event loop
-    app.exec_()
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextEdit, QPushButton, QMainWindow
+from PyQt5.uic import loadUi
+from PyQt5.QtGui import QPixmap
 
 
 
@@ -46,7 +12,6 @@ def initUI(kanji, meanings):
 def screenLayer():
     def on_click(event):
         root.destroy()
-    # Create the root window
     root = tk.Tk()
 
     root.overrideredirect(True)
@@ -54,17 +19,14 @@ def screenLayer():
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
 
-    # Set properties of the root window
     root.title('KanjiReader')
     root.geometry(f"{screen_width}x{screen_height}+0+0")
     root.attributes('-topmost', True)  # Make the overlay window always on top
     root.attributes('-alpha', 0.15)  # Set transparency level (0.0 to 1.0)
 
-    # Create a canvas to draw on
     canvas = tk.Canvas(root, bg='gray', highlightthickness=0)
     canvas.pack(fill=tk.BOTH, expand=True)
 
-    # Start the Tkinter event loop
 
     canvas.bind('<ButtonRelease-1>', on_click)
     root.mainloop()
@@ -72,3 +34,64 @@ def screenLayer():
 
 
 
+
+
+
+def textUi(translated_text):
+
+
+    app = QApplication(sys.argv)
+
+    ui = loadUi('Text.ui')
+    #ui.actionClose.triggered.connect(ui.hide())
+    #ui.actionQuit.triggered.connect(ui.exit())
+
+
+    def nextKanji():
+        if len(translated_text) == 0:
+            ui.textBox.setText("Could not read message")
+        elif len(translated_text) == iKanji:
+            ui.textBox.setText(translated_text[iKanji % len(translated_text)])
+        else:
+            ui.textBox.setText(translated_text[iKanji])
+
+    def prevKanji():
+        if len(translated_text) == 0:
+            ui.textBox.setText("Could not read message")
+        elif len(translated_text) == iKanji-jKanji:
+            ui.textBox.setText(translated_text[iKanji-jKanji % len(translated_text)])
+        else:
+            ui.textBox.setText(translated_text[iKanji-jKanji])
+
+
+    img = QPixmap('screenshot.png')
+    if(img.width() > 120):
+        ui.resize(img.width() + 80, img.height() + 160)
+        ui.image.resize(img.width(), img.height())
+        ui.textBox.move(0, img.height())
+        ui.textBox.resize(img.width(), 65)
+        ui.prevButton.move(int(img.width() / 4), int(img.height() + 80))
+        # not added
+        # ui.copyButton(int(img.width()/2), int(img.height() + 50))
+        ui.nextButton.move(int(img.width() * 3 / 4), int(img.height() + 80))
+
+
+
+    ui.image.setPixmap(img)
+    if len(translated_text) == 0:
+        ui.textBox.setText("Could not read message")
+    else:
+        ui.textBox.setText(translated_text[0])
+
+
+    global iKanji, jKanji
+    iKanji, jKanji = 0, 0
+#implement next/prev/copy buttons
+    if(ui.nextButton.clicked.connect(nextKanji)) :
+        iKanji += 1
+
+    if (ui.prevButton.clicked.connect(prevKanji)):
+        jKanji += 1
+
+    ui.show()
+    sys.exit(app.exec_())
