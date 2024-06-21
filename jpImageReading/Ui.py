@@ -1,4 +1,7 @@
 import sys
+
+import tkinter as tk
+from tkinter import messagebox
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTextEdit, QPushButton
 
 
@@ -35,6 +38,36 @@ def initUI(kanji, meanings):
 
     # Execute the application's event loop
     app.exec_()
+
+
+
+
+
+def screenLayer():
+    def on_click(event):
+        root.destroy()
+    # Create the root window
+    root = tk.Tk()
+
+    root.overrideredirect(True)
+
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+
+    # Set properties of the root window
+    root.title('KanjiReader')
+    root.geometry(f"{screen_width}x{screen_height}+0+0")
+    root.attributes('-topmost', True)  # Make the overlay window always on top
+    root.attributes('-alpha', 0.15)  # Set transparency level (0.0 to 1.0)
+
+    # Create a canvas to draw on
+    canvas = tk.Canvas(root, bg='gray', highlightthickness=0)
+    canvas.pack(fill=tk.BOTH, expand=True)
+
+    # Start the Tkinter event loop
+
+    canvas.bind('<ButtonRelease-1>', on_click)
+    root.mainloop()
 
 
 

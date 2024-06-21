@@ -7,15 +7,23 @@ from PIL import ImageGrab
 from tkinter import messagebox
 from pynput import mouse
 from PIL import Image
+import Ui
+
+
+
 
 def takePicture():
     with mouse.Listener(on_click=on_click) as listener:
+        Ui.screenLayer()
         listener.join()
+
+
     img = Image.open('screenshot.png')
     return img
 
 def on_click(x, y, button, pressed):
     global x1, x2, y1, y2
+
     if pressed:
         print(f"Mouse button {button} pressed at ({x}, {y})")
         x1, y1 = x, y
