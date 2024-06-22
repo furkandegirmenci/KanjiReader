@@ -20,7 +20,7 @@ def tokenize_japanese_sudachi(s_text):
     tokens = [m.surface() for m in tokenizer_obj.tokenize(s_text)]
     tokens = [token for token in tokens if token != '\n']
 
-    symbols = set('()=?!"#$%&\'*+,-./:;<=>@[\\]^_`{|}~0123456789 「」、abcçdefgğhıijklmnoöprqsştuüxvwyzABCÇDEFGĞHIİJKLMOÖPRQSŞTUÜVXWYZ・')
+    symbols = set('()=?!"#$%&\'*+,-./:;<=>@[\\]^_`{|}~0123456789 「」、abcçdefgğhıijklmnoöprqsştuüxvwyzABCÇDEFGĞHIİJKLMOÖPRQSŞTUÜVXWYZ・\n')
 
     tokens = [token for token in tokens if not all(char in symbols for char in token)]
 
