@@ -1,0 +1,7 @@
+PyQt5~=5.15.10
+cx_Freeze~=7.1.1
+pillow~=10.3.0
+pynput~=1.7.7
+requests~=2.32.3
+pytesseract~=0.3.10
+SudachiPy~=0.6.8
