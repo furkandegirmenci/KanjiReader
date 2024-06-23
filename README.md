@@ -30,19 +30,12 @@ Step 4 - Open cmd on the project directory
 Step 5 - Download the required libraries(versions are given in requirements.txt), commands are given below
 
         pip install cx_Freeze
-        
         pip install pillow
-        
         pip install pyqt5
-        
         pip install pynput
-        
         pip install requests
-        
         pip install pytesseract
-        
         pip install sudachipy
-        
         pip install sudachidict_core
 
         
