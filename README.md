@@ -20,19 +20,34 @@ If your tesseract is not at "C:\\Program Files\\Tesseract-OCR\\tesseract.exe", p
 
 # Manual Setup
 Step 1 - Download the open source files
+
 Step 2 - Open ImageReader.py file
+
 Step 3 - At line 10, change the path to where your "tesseract.exe" located at
+
 Step 4 - Open cmd on the project directory
+
 Step 5 - Download the required libraries(versions are given in requirements.txt), commands are given below
+
         pip install cx_Freeze
+        
         pip install pillow
+        
         pip install pyqt5
+        
         pip install pynput
+        
         pip install requests
+        
         pip install pytesseract
+        
         pip install sudachipy
+        
         pip install sudachidict_core
+
+        
 Step 6 - execute "python setup.py build" command
+
 Step 7 - Go into "build/exe.win-amd64-3.12" directory, you can open the program with main.exe file
 
 
