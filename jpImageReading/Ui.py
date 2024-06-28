@@ -87,6 +87,7 @@ def textUi(translated_text):
     global iKanji, jKanji
     iKanji, jKanji = 0, 0
 #implement next/prev/copy buttons
+    #crashes on click when there is no if statement
     if(ui.nextButton.clicked.connect(nextKanji)) :
         iKanji += 1
 
