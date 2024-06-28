@@ -7,9 +7,9 @@ executables = [
 
 # Setup parameters
 setup(
-    name='YourAppName',
+    name='KanjiReader',
     version='1.0',
-    description='Description of your app',
+    description='KanjiReader Beta',
     executables=executables,
     options={
         'build_exe': {
