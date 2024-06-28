@@ -30,6 +30,7 @@ def on_click(x, y, button, pressed):
     else:
         #print(f"Mouse button {button} released at ({x}, {y})")
         x2, y2 = x, y
+# fix for crash when starting to take ss from bottom/right to top/left
         if(x1 > x2):
             temp = x1
             x1 = x2
@@ -38,6 +39,12 @@ def on_click(x, y, button, pressed):
             temp = y1
             y1 = y2
             y2 = temp
+
+# fix for one dimensional image crash
+        if x1 == x2:
+            x1 = x2 - 1
+        if y1 == y2:
+            y1 = y1 - 1
         screenshot = ImageGrab.grab(bbox=(x1, y1, x2, y2))
         screenshot.save('screenshot.png')
         return False
