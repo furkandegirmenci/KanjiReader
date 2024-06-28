@@ -25,10 +25,10 @@ def on_click(x, y, button, pressed):
     global x1, x2, y1, y2
 
     if pressed:
-        print(f"Mouse button {button} pressed at ({x}, {y})")
+        #print(f"Mouse button {button} pressed at ({x}, {y})")
         x1, y1 = x, y
     else:
-        print(f"Mouse button {button} released at ({x}, {y})")
+        #print(f"Mouse button {button} released at ({x}, {y})")
         x2, y2 = x, y
         if(x1 > x2):
             temp = x1
